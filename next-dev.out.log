@@ -1,0 +1,146 @@
+
+> expense-tracker@0.1.0 dev
+> next dev --webpack
+
+▲ Next.js 16.2.0 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.56.1:3000
+- Environments: .env.local, .env
+✓ Ready in 5.9s
+
+○ Compiling /finance ...
+ GET /finance 200 in 17.3s (next.js: 14.0s, application-code: 3.3s)
+ GET /finance 200 in 1302ms (next.js: 30ms, application-code: 1272ms)
+ GET /finance 200 in 1307ms (next.js: 64ms, application-code: 1243ms)
+ POST /finance 200 in 1798ms (next.js: 42ms, application-code: 1756ms)
+  └─ ƒ categorizeTransactionAction({}) in 833ms ..//src/actions/finance-actions.ts
+ POST /finance 200 in 2.3s (next.js: 35ms, application-code: 2.2s)
+  └─ ƒ categorizeTransactionAction({}) in 1165ms ..//src/actions/finance-actions.ts
+ POST /finance 200 in 2.1s (next.js: 43ms, application-code: 2.1s)
+  └─ ƒ categorizeTransactionAction({}) in 1196ms ..//src/actions/finance-actions.ts
+ POST /finance 200 in 2.1s (next.js: 36ms, application-code: 2.0s)
+  └─ ƒ categorizeTransactionAction({}) in 1107ms ..//src/actions/finance-actions.ts
+ GET /finance 200 in 1956ms (next.js: 188ms, application-code: 1768ms)
+ GET /finance 200 in 1335ms (next.js: 227ms, application-code: 1108ms)
+ GET /finance 200 in 1336ms (next.js: 139ms, application-code: 1197ms)
+ GET /finance 200 in 892ms (next.js: 39ms, application-code: 853ms)
+ GET /finance 200 in 1196ms (next.js: 53ms, application-code: 1144ms)
+ POST /finance 200 in 1936ms (next.js: 40ms, application-code: 1896ms)
+  └─ ƒ categorizeTransactionAction({}) in 857ms ..//src/actions/finance-actions.ts
+ POST /finance 200 in 1681ms (next.js: 43ms, application-code: 1638ms)
+  └─ ƒ categorizeTransactionAction({}) in 790ms ..//src/actions/finance-actions.ts
+ POST /finance 200 in 1775ms (next.js: 43ms, application-code: 1732ms)
+  └─ ƒ categorizeTransactionAction({}) in 874ms ..//src/actions/finance-actions.ts
+ GET /finance 200 in 1953ms (next.js: 213ms, application-code: 1740ms)
+ GET /finance 200 in 1394ms (next.js: 206ms, application-code: 1188ms)
+ GET /finance 200 in 2.0s (next.js: 160ms, application-code: 1843ms)
+ GET /finance 200 in 1264ms (next.js: 41ms, application-code: 1222ms)
+ GET /finance 200 in 1305ms (next.js: 89ms, application-code: 1216ms)
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+ GET /finance 200 in 2.4s (next.js: 47ms, application-code: 2.3s)
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+ GET /finance 200 in 2.6s (next.js: 285ms, application-code: 2.3s)
+ GET /finance 200 in 1338ms (next.js: 170ms, application-code: 1168ms)
+ GET /finance 200 in 1807ms (next.js: 43ms, application-code: 1765ms)
+ GET /finance 200 in 1394ms (next.js: 42ms, application-code: 1352ms)
+ GET /finance 200 in 1248ms (next.js: 42ms, application-code: 1206ms)
+ GET /finance 200 in 1231ms (next.js: 182ms, application-code: 1048ms)
+ GET /finance 200 in 1167ms (next.js: 34ms, application-code: 1133ms)
+ GET /finance 200 in 1684ms (next.js: 30ms, application-code: 1654ms)
+ GET /finance 200 in 1150ms (next.js: 41ms, application-code: 1109ms)
+ POST /finance 200 in 2.3s (next.js: 43ms, application-code: 2.3s)
+  └─ ƒ categorizeTransactionAction({}) in 1238ms ..//src/actions/finance-actions.ts
+ GET /finance/settings 200 in 3.7s (next.js: 2.6s, application-code: 1107ms)
+ GET /finance 200 in 1023ms (next.js: 65ms, application-code: 958ms)
+ POST /finance 200 in 13.2s (next.js: 40ms, application-code: 13.1s)
+  └─ ƒ syncSimpleFinAction({"status":"idle"}) in 12194ms ..//src/actions/finance-actions.ts
+ GET /finance/report 200 in 3.8s (next.js: 1450ms, application-code: 2.3s)
+ GET /finance?month=2026-06 200 in 1183ms (next.js: 70ms, application-code: 1113ms)
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+ GET /finance?month=2026-06 200 in 2.0s (next.js: 247ms, application-code: 1786ms)
+ GET /finance?month=2026-06 200 in 676ms (next.js: 50ms, application-code: 626ms)
+ GET /finance?month=2026-06 200 in 672ms (next.js: 41ms, application-code: 632ms)
+ GET /finance?month=2026-06 200 in 1014ms (next.js: 280ms, application-code: 734ms)
+ GET /finance?month=2026-06 200 in 900ms (next.js: 179ms, application-code: 721ms)
+ GET /finance?month=2026-06 200 in 2.4s (next.js: 1397ms, application-code: 1049ms)
+ GET /finance?month=2026-06 200 in 623ms (next.js: 27ms, application-code: 596ms)
+ GET /finance?month=2026-06 200 in 759ms (next.js: 104ms, application-code: 654ms)
+ GET /finance?month=2026-06 200 in 769ms (next.js: 102ms, application-code: 667ms)
+ GET /finance 200 in 731ms (next.js: 40ms, application-code: 690ms)
+[?25h
+
+> expense-tracker@0.1.0 dev
+> next dev --webpack
+
+▲ Next.js 16.2.0 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.56.1:3000
+- Environments: .env.local, .env
+✓ Ready in 5.9s
+
+○ Compiling /finance ...
+ GET /finance?month=2026-06 200 in 20.3s (next.js: 16.6s, application-code: 3.7s)
+ GET /finance?month=2026-06 200 in 1546ms (next.js: 192ms, application-code: 1355ms)
+ GET /finance?month=2026-06 200 in 1459ms (next.js: 146ms, application-code: 1313ms)
+ GET /finance?month=2026-06 200 in 1499ms (next.js: 44ms, application-code: 1456ms)
+ GET /finance 200 in 117ms (next.js: 45ms, application-code: 72ms)
+ GET /finance 200 in 1109ms (next.js: 37ms, application-code: 1072ms)
+ GET /finance/report 200 in 3.3s (next.js: 1171ms, application-code: 2.1s)
+ GET /finance 200 in 1152ms (next.js: 69ms, application-code: 1083ms)
+ GET /finance/settings 200 in 4.4s (next.js: 2.5s, application-code: 1830ms)
+ GET /finance 200 in 1590ms (next.js: 73ms, application-code: 1517ms)
+ GET /finance/settings 200 in 1434ms (next.js: 36ms, application-code: 1398ms)
+ GET /finance/report 200 in 2.4s (next.js: 58ms, application-code: 2.4s)
+ GET /finance 200 in 1210ms (next.js: 41ms, application-code: 1169ms)
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+ GET /finance 200 in 2.9s (next.js: 282ms, application-code: 2.6s)
+ GET /finance 200 in 1884ms (next.js: 259ms, application-code: 1626ms)
+ GET /finance?month=2026-06 200 in 2.5s (next.js: 37ms, application-code: 2.4s)
+ GET /finance 200 in 1904ms (next.js: 33ms, application-code: 1871ms)
+ GET /finance/settings 200 in 2.0s (next.js: 355ms, application-code: 1687ms)
+ GET /finance 200 in 1338ms (next.js: 43ms, application-code: 1296ms)
+ GET /finance/report 200 in 2.4s (next.js: 212ms, application-code: 2.2s)
+ GET /finance 200 in 1043ms (next.js: 43ms, application-code: 1000ms)
+ GET /finance/settings 200 in 1106ms (next.js: 41ms, application-code: 1065ms)
+ GET /finance/settings 200 in 1178ms (next.js: 44ms, application-code: 1134ms)
+ GET /finance 200 in 1104ms (next.js: 38ms, application-code: 1066ms)
+ GET /finance 200 in 1663ms (next.js: 251ms, application-code: 1412ms)
+ GET /finance?month=2026-06 200 in 2.1s (next.js: 43ms, application-code: 2.0s)
+ GET /finance 200 in 1335ms (next.js: 46ms, application-code: 1288ms)
+ GET /finance/settings 200 in 1803ms (next.js: 72ms, application-code: 1731ms)
+ GET /finance 200 in 1444ms (next.js: 38ms, application-code: 1406ms)
+ GET /finance/report 200 in 2.2s (next.js: 55ms, application-code: 2.2s)
+ GET /finance 200 in 1199ms (next.js: 44ms, application-code: 1155ms)
+ GET /finance 200 in 1677ms (next.js: 238ms, application-code: 1440ms)
+ GET / 200 in 1973ms (next.js: 1716ms, application-code: 257ms)
+ GET /finance 200 in 294ms (next.js: 45ms, application-code: 249ms)
+ GET /finance 200 in 2.3s (next.js: 56ms, application-code: 2.2s)
+ GET /finance 200 in 1771ms (next.js: 264ms, application-code: 1508ms)
+ GET / 200 in 273ms (next.js: 52ms, application-code: 222ms)
+ GET /finance 200 in 1855ms (next.js: 44ms, application-code: 1811ms)
+ GET /finance 200 in 2.1s (next.js: 53ms, application-code: 2.1s)
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }

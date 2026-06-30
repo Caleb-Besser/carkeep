@@ -1,0 +1,22 @@
+⨯ Error: Settings access is locked.
+    at requireSettingsAuthorization (src\lib\server\settings-auth.ts:40:46)
+    at async categorizeTransactionAction (src\actions\finance-actions.ts:62:3)
+  38 |
+  39 | export async function requireSettingsAuthorization() {
+> 40 |   if (!(await isSettingsAuthorized())) throw new Error("Settings access is locked.");
+     |                                              ^
+  41 | }
+  42 |
+  43 | export async function unlockSettings(password: string) { {
+  digest: '3227062657'
+}
+[browser] Uncaught Error: Settings access is locked.
+    at requireSettingsAuthorization (src\lib\server\settings-auth.ts:40:46)
+    at  categorizeTransactionAction (src\actions\finance-actions.ts:62:3)
+  38 |
+  39 | export async function requireSettingsAuthorization() {
+> 40 |   if (!(await isSettingsAuthorized())) throw new Error("Settings access is locked.");
+     |                                              ^
+  41 | }
+  42 |
+  43 | export async function unlockSettings(password: string) {
