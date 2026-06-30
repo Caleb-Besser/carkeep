@@ -1,0 +1,318 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RecurringFrequency {
+  WEEKLY
+  MONTHLY
+  YEARLY
+  CUSTOM
+}
+
+enum CategoryKind {
+  USER
+  SYSTEM
+}
+
+enum SystemCategoryKey {
+  UNCATEGORIZED
+  TRANSFERS
+  INCOME
+}
+
+enum TransactionSource {
+  ALLY
+  DISCOVER
+}
+
+enum FinancialProvider {
+  SIMPLEFIN
+  CSV
+}
+
+enum FinancialAccountType {
+  CHECKING
+  SAVINGS
+  CREDIT_CARD
+  CASH
+  OTHER
+}
+
+enum ImportSource {
+  SIMPLEFIN
+  CSV
+}
+
+enum TransactionKind {
+  EXPENSE
+  INCOME
+  TRANSFER
+  CREDIT_CARD_PAYMENT
+  SAVINGS_TRANSFER
+  REFUND
+  REIMBURSEMENT
+  CASH_WITHDRAWAL
+  UNCATEGORIZED
+}
+
+enum TransactionReviewStatus {
+  AUTO_CATEGORIZED
+  NEEDS_REVIEW
+  USER_CONFIRMED
+}
+
+enum TransactionRuleMatchType {
+  EXACT
+  CONTAINS
+  STARTS_WITH
+  REGEX
+}
+
+enum SimpleFinSyncStatus {
+  IDLE
+  SYNCING
+  SUCCESS
+  FAILED
+}
+
+model User {
+  id                  String               @id @default(cuid())
+  email               String               @unique
+  name                String?
+  bills               Bill[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  categories          Category[]
+  expenses            Expense[]
+  merchantRules       MerchantRule[]
+  recurringExpenses   RecurringExpense[]
+  financialAccounts   FinancialAccount[]
+  transactions        Transaction[]
+  transactionRules    TransactionRule[]
+  sinkingFunds        SinkingFund[]
+  simpleFinConnection SimpleFinConnection?
+}
+
+model SinkingFund {
+  id                       String   @id @default(cuid())
+  userId                   String
+  name                     String
+  monthlyContributionCents Int
+  currentBalanceCents      Int      @default(0)
+  icon                     String?
+  color                    String?
+  sortOrder                Int      @default(0)
+  isActive                 Boolean  @default(true)
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+  user                     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, name])
+  @@index([userId, isActive, sortOrder])
+}
+
+model Category {
+  id                 String             @id @default(cuid())
+  userId             String
+  name               String
+  icon               String?
+  color              String?
+  monthlyBudgetCents Int
+  kind               CategoryKind       @default(USER)
+  systemKey          SystemCategoryKey?
+  sortOrder          Int                @default(0)
+  isArchived         Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expenses           Expense[]
+  merchantRules      MerchantRule[]
+  recurringExpenses  RecurringExpense[]
+  transactions       Transaction[]
+  transactionRules   TransactionRule[]
+
+  @@unique([userId, name])
+  @@unique([userId, systemKey])
+  @@index([userId, sortOrder])
+}
+
+model Expense {
+  id          String            @id @default(cuid())
+  userId      String
+  categoryId  String?
+  billId      String?
+  amountCents Int
+  expenseDate DateTime
+  note        String?
+  source      TransactionSource @default(ALLY)
+  sourceId    String?
+  merchantKey String?
+  rawCategory String?
+  importedAt  DateTime          @default(now())
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bill        Bill?             @relation(fields: [billId], references: [id], onDelete: SetNull)
+  category    Category?         @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, source, sourceId])
+  @@index([userId, expenseDate])
+  @@index([billId, expenseDate])
+  @@index([categoryId, expenseDate])
+  @@index([userId, merchantKey])
+}
+
+model Bill {
+  id                 String    @id @default(cuid())
+  userId             String
+  name               String
+  monthlyAmountCents Int
+  dueDay             Int?
+  merchantKey        String?
+  notes              String?
+  sortOrder          Int       @default(0)
+  isActive           Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expenses           Expense[]
+
+  @@unique([userId, name])
+  @@unique([userId, merchantKey])
+  @@index([userId, sortOrder])
+}
+
+model MerchantRule {
+  id          String   @id @default(cuid())
+  userId      String
+  categoryId  String
+  merchantKey String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, merchantKey])
+  @@index([userId, categoryId])
+}
+
+model RecurringExpense {
+  id              String             @id @default(cuid())
+  userId          String
+  categoryId      String?
+  name            String
+  amountCents     Int
+  note            String?
+  frequency       RecurringFrequency @default(MONTHLY)
+  interval        Int                @default(1)
+  startDate       DateTime
+  dayOfMonth      Int?
+  dayOfWeek       Int?
+  nextDueDate     DateTime?
+  endDate         DateTime?
+  isActive        Boolean            @default(true)
+  transactionKind TransactionKind    @default(EXPENSE)
+  isRequired      Boolean            @default(true)
+  merchantMatch   String?
+  paymentGroupKey String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category        Category?          @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([userId, isActive, nextDueDate])
+  @@index([userId, paymentGroupKey])
+}
+
+model FinancialAccount {
+  id                    String               @id @default(cuid())
+  userId                String
+  providerAccountId     String
+  provider              FinancialProvider    @default(SIMPLEFIN)
+  institutionName       String?
+  name                  String
+  displayName           String
+  accountType           FinancialAccountType @default(OTHER)
+  currentBalanceCents   Int                  @default(0)
+  availableBalanceCents Int?
+  currency              String               @default("USD")
+  includeInDashboard    Boolean              @default(true)
+  lastSyncedAt          DateTime?
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  user                  User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions          Transaction[]
+
+  @@unique([userId, provider, providerAccountId])
+  @@index([userId, includeInDashboard])
+}
+
+model Transaction {
+  id                    String                  @id @default(cuid())
+  userId                String
+  accountId             String
+  providerTransactionId String?
+  importSource          ImportSource
+  importFingerprint     String?
+  postedAt              DateTime
+  transactedAt          DateTime?
+  amountCents           Int
+  description           String
+  merchantName          String?
+  normalizedDescription String
+  rawCategory           String?
+  transactionKind       TransactionKind         @default(UNCATEGORIZED)
+  categoryId            String?
+  isPending             Boolean                 @default(false)
+  reviewStatus          TransactionReviewStatus @default(NEEDS_REVIEW)
+  rawData               Json?
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  user                  User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  account               FinancialAccount        @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  category              Category?               @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@unique([accountId, providerTransactionId])
+  @@unique([userId, importSource, importFingerprint])
+  @@index([userId, postedAt])
+  @@index([userId, transactionKind, postedAt])
+  @@index([categoryId, postedAt])
+  @@index([reviewStatus, postedAt])
+}
+
+model TransactionRule {
+  id                 String                   @id @default(cuid())
+  userId             String
+  matchText          String
+  matchType          TransactionRuleMatchType @default(CONTAINS)
+  normalizedMerchant String?
+  categoryId         String?
+  transactionKind    TransactionKind
+  priority           Int                      @default(0)
+  isActive           Boolean                  @default(true)
+  createdAt          DateTime                 @default(now())
+  updatedAt          DateTime                 @updatedAt
+  user               User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category           Category?                @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([userId, isActive, priority])
+}
+
+model SimpleFinConnection {
+  id                   String              @id @default(cuid())
+  userId               String              @unique
+  encryptedAccessUrl   String
+  isActive             Boolean             @default(true)
+  syncStatus           SimpleFinSyncStatus @default(IDLE)
+  lastSuccessfulSyncAt DateTime?
+  lastSyncAttemptAt    DateTime?
+  lastSyncError        String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
