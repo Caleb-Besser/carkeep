@@ -14,11 +14,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Finance Tracker",
-  description: "Personal finance dashboard for budgets, accounts, bills, savings, and transaction tracking.",
+  title: "CarKeep — 2016 Acura ILX",
+  description: "A calm, guided routine for weekly and monthly car checks.",
   icons: {
-    icon: "/finance_logo.png",
-    shortcut: "/finance_logo.png",
+    icon: "/carkeep-icon.png",
+    shortcut: "/carkeep-icon.png",
   },
 };
 

@@ -1,5 +1,5 @@
-import { permanentRedirect } from "next/navigation";
+import CarKeepApp from "@/components/carkeep/car-keep-app";
 
 export default function Home() {
-  permanentRedirect("/finance");
+  return <CarKeepApp />;
 }
